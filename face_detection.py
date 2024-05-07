@@ -3,6 +3,11 @@ import cv2
 # Charger le classificateur de visages pré-entraîné
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
+# Vérifier si le classificateur de visages est chargé avec succès
+if face_cascade.empty():
+    print("Erreur: Impossible de charger le classificateur de visages.")
+    exit()
+
 # Capturer la vidéo en direct à partir de la webcam
 cap = cv2.VideoCapture(0)
 
@@ -10,6 +15,7 @@ while True:
     # Lire une image de la vidéo
     ret, frame = cap.read()
     if not ret:
+        print("Erreur: Impossible de capturer la vidéo.")
         break
 
     # Convertir l'image en niveaux de gris
